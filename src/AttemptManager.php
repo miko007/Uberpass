@@ -82,6 +82,15 @@ class AttemptManager {
 		return true;
 	}
 
+	public function reset(string $email) : void {
+		foreach ($this->data as $user) {
+			if ($user->email !== $email)
+				continue;
+			$user->reset();
+			$this->save();
+		}
+	}
+
 	public function falseAttempt(string $email) : void {
 		$user = null;
 		foreach ($this->data as $localUser) {
