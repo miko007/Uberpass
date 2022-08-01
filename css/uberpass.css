@@ -101,6 +101,11 @@
   color: #822f2f;
 }
 
+.alert.success {
+  background: #d7ffd9;
+  color: #477749;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;

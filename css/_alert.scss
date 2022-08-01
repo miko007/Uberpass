@@ -5,4 +5,9 @@
 	margin: 1rem 0;
 	box-shadow: 0 0 6px rgba(0,0,0,0.1);
 	color: rgb(130, 47, 47);
+
+	&.success {
+		background: rgb(215, 255, 217);
+		color: rgb(71, 119, 73);
+	}
 }
