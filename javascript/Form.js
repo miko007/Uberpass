@@ -27,7 +27,7 @@ class Form {
 					return new Error("Es sind nicht alle erforderlichen Felder ausgefüllt.");
 			}
 			if (data.password !== data.passwordConfirm)
-				return new Error("1Die angegebeben Passwörter stimmen nicht überein.");
+				return new Error("Die angegebeben Passwörter stimmen nicht überein.");
 
 			return null;
 		};
