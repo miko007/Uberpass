@@ -51,7 +51,7 @@ class Form {
 				DisplayError(json.data);
 			else {
 				DisplaySuccess("Ihr Passwort wurde erfolgreich geändert.");
-				this.container.clear();
+				this.container.reset();
 			}
 		}).catch(error => {
 			console.error(error);
