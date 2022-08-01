@@ -16,11 +16,20 @@ const DisplayError = message => {
 	error = true;
 };
 
-const clearDisplayError = () => {
+const DisplaySuccess = message => {
+	const container = $("#error");
+	container.innerHTML = `
+		<section class="alert success">
+			${message}
+		</section>
+	`;
+	error = true;
+};
+
+const clearDisplay = () => {
 	const container = $("#error");
 	container.innerHTML = "";
 	error = false;
 };
 
-export {clearDisplayError};
-export default DisplayError;
+export {clearDisplay, DisplayError, DisplaySuccess};
