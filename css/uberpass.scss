@@ -1,0 +1,41 @@
+@import "variables";
+@import "grids";
+@import "card";
+@import "alert";
+
+* {
+	box-sizing: border-box;
+}
+
+body, html {
+	font-size: 16px;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: sans-serif;
+}
+
+#background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: #22b799;
+	background: linear-gradient(135deg, #22b799 0%,#258dc8 50%,#5b1c93 100%);
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow-y: auto;
+	padding: 1rem;
+}

@@ -1,0 +1,74 @@
+.card {
+	background: rgba(255,255,255,0.8);
+	text-align: center;
+	box-shadow: 0 0 16px rgba(0,0,0,0.2);
+	backdrop-filter: blur(6px);
+	border-radius: 1.2rem;
+	padding: 2rem;
+	max-width: 400px;
+	line-height: 1.3rem;
+	color: #333;
+
+	img {
+		max-width: 110px;
+	}
+
+	h1 {
+		font-weight: normal;
+		font-size: 2rem;
+	}
+
+	.logo {
+		display: flex;
+		gap: 2rem;
+
+		> * {
+			flex: 1;
+
+			&:last-child {
+				text-align: left;
+				flex: 2;
+			}
+		}
+	}
+
+	input {
+		background: white;
+		border: none;
+		border-radius: 8px;
+		padding: 1rem;
+		display: block;
+		width: 100%;
+		border: solid 1px #ddd;
+		font-size: 1.2rem;
+		margin-bottom: 1rem;
+		outline: 0 !important;
+
+		&:focus {
+			outline: solid 3px transparentize($highlight, 0.8) !important;
+		}
+
+		&:nth-child(2) {
+			margin-bottom: 2rem;
+		}
+	}
+
+	button {
+		background: $highlight;
+		color: white;
+		border: none;
+		border-radius: 8px;
+		padding: 1rem;
+		display: block;
+		width: 100%;
+		font-size: 1.2rem;
+
+		&:hover {
+			background: darken($highlight, 5);
+		}
+
+		&:active {
+			background: darken($highlight, 10);
+		}
+	}
+}
