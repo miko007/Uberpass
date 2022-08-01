@@ -25,7 +25,7 @@ $user      = null;
 $userError = false;
 
 try {
-	$user = new User($email);
+	$user = new User($email, $settings);
 } catch (Error $error) {
 	if ($email !== "" && !$post->hasErrors() && $passwordsMatch)
 		$userError = true;
@@ -47,7 +47,8 @@ if (!$error && $user) {
 	if ($user->validPassword($post->get("currentPassword"))) {
 		$user->setPassword($password);
 	} else {
-		$erro = new Error("Benutzername und/oder Passwort sind inkorrekt", 503);
+		$attemptManager->falseAttempt($email);
+		$error = new Error("Benutzername und/oder Passwort sind inkorrekt", 503);
 	}
 }
 

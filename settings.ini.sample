@@ -1,0 +1,4 @@
+logo  = "images/uberspace_rocket.svg"
+title = Uberpass
+
+DEBUG = true

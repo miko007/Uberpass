@@ -39,12 +39,16 @@ class AttemptManager {
 	public function __construct(string $fileName, Settings $settings) {
 		$this->settings = $settings;
 		$this->data     = [];
+		$this->fileName = $fileName;
+
 		if (!file_exists($fileName))
 			file_put_contents($fileName, "[]");
-		foreach (json_decode(file_get_contents($fileName)) as $user) {
+		$fileData = json_decode(file_get_contents($fileName));
+		if (!$fileData)
+			$this->save();
+		foreach ($fileData as $user) {
 			array_push($this->data, new SerializedUser($user));
 		}
-		$this->fileName = $fileName;
 	}
 
 	private function save() : void {
@@ -67,11 +71,11 @@ class AttemptManager {
 		foreach ($this->data as $user) {
 			if (!$user->email === $email)
 				continue;
-			if ((time() - $user->lastTime) > 60 * 60 * intval($this->settings->get("HOURS_TO_WAIT", "1"))) {
+			if ((time() - $user->lastTime) > 60 * 60 * intval($this->settings->get("hours_to_wait", "1"))) {
 				$user->reset();
 				$this->save();
 			}
-			if ($user->attempts >= intval($this->settings->get("MAX_TRIES", "3")))
+			if ($user->attempts >= intval($this->settings->get("max_tries", "3")))
 				return false;
 		}
 

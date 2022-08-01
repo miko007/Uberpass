@@ -9,15 +9,31 @@ namespace uberpass;
  */
 class User {
 	private $passwordHash;
-	private $kayosID;
+	private $username;
 	private $isValidUser;
+	private $settings;
+	private $debug;
+	
+	private static $DebugInfo = 'Name: ttt
+Encrypted-Password: $1$Kt0F66a1$h0W.KWr7GbwWMeuN.UjMc1
+Directory: ./users/ttt
+Hard-Quota: N/A
+Soft-Quota: N/A
+Message-Size-Limit: N/A
+Message-Count-Limit: N/A
+Creation-Time: 1659102075
+Expiry-Time: N/A
+Has-Mailbox: true
+Mailbox-Enabled: true';
 
 	/**
 	 * Constructor
 	 *
 	 * @param $kayosID
 	 */
-	public function __construct(string $email) {
+	public function __construct(string $email, Settings $settings) {
+		$this->settings    = $settings;
+		$this->debug       = $this->settings->get("DEBUG") ? true : false;
 		$this->username    = self::EmailToUserId($email);
 		$this->isValidUser = $this->getUserInfo();
 	}
@@ -37,7 +53,7 @@ class User {
 	 * @return bool
 	 */
 	private function getUserInfo() : bool {
-		$info = shell_exec("dumpvuser " . escapeshellarg($this->username));
+		$info = $this->debug ? self::$DebugInfo : shell_exec("dumpvuser " . escapeshellarg($this->username));
 		$info = explode("\n", $info);
 		if (count($info) < 2)
 			return false;
@@ -82,7 +98,7 @@ class User {
 	 * @return int
 	 */
 	public function setPassword($password) : int {
-		$result = shell_exec("echo -e " . escapeshellarg($password . "\n" . $password) . " | vpasswd " . escapeshellarg($this->username));
+		$result = shell_exec("echo " . escapeshellarg($password) . " | vpasswd " . escapeshellarg($this->username));
 
 		return $result ? 0 : 1;
 	}

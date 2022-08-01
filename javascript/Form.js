@@ -49,6 +49,8 @@ class Form {
 		}).then(response => response.json()).then(json => {
 			if (json.status !== 200)
 				DisplayError(json.data);
+			else
+				console.log(json);
 		}).catch(error => {
 			console.error(error);
 		});
