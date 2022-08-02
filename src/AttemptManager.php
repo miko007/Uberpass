@@ -2,35 +2,7 @@
 
 namespace uberpass;
 
-use phpDocumentor\Reflection\Types\This;
 use stdClass;
-
-class SerializedUser {
-	public $email;
-	public $attempts;
-	public $lastTime;
-
-	public function __construct(?stdClass $object = null) {
-		if ($object) {
-			$this->email    = $object->email;
-			$this->attempts = intval($object->attempts);
-			$this->lastTime = $object->lastTime;
-		} else {
-			$this->attempts = 0;
-			$this->lastTime = time();
-		}
-	}
-
-	public function increase() : void {
-		$this->attempts += 1;
-		$this->lastTime = time();
-	}
-
-	public function reset() : void {
-		$this->attempts = 0;
-		$this->lastTime = time();
-	}
-}
 
 /*
 	FILE FORMAT
@@ -86,7 +58,7 @@ class AttemptManager {
 	public function reset(string $email) : void {
 		if (!$this->exists($email))
 			return;
-		$this->data[$email]->a = 0;
+		unset($this->data[$email]);
 	}
 
 	public function fail(string $email) : void {
