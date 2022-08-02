@@ -3,8 +3,10 @@
 import {$}                               from "./util.js";
 import DisplayError, {clearDisplayError} from "./DisplayError.js";
 
+let _;
 class Form {
-	constructor() {
+	constructor(i18n) {
+		_ = i18n;
 		this.container = $("#form");
 
 		this.container.addEventListener("submit", event => {
@@ -20,14 +22,13 @@ class Form {
 		clearDisplayError();
 		for (const field of fields)
 			data[field.name] = field.value;
-
 		const checkValidity = () => {
-			for (const [_, value] of Object.entries(fields)) {
-				if (value === "")
-					return new Error("Es sind nicht alle erforderlichen Felder ausgefüllt.");
+			for (const [key, input] of Object.entries(fields)) {
+				if (input.value === "")
+					return new Error(_("Not all nessecary fields are propagated."));
 			}
 			if (data.password !== data.passwordConfirm)
-				return new Error("1Die angegebeben Passwörter stimmen nicht überein.");
+				return new Error(_("The supplied passwords do not match."));
 
 			return null;
 		};

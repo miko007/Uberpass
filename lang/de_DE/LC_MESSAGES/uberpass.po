@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-08-02 22:07+0200\n"
+"PO-Revision-Date: 2022-08-02 22:07+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-KeywordsList: __;_\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: backend.php:36 javascript/Form.js:28
+msgid "Not all nessecary fields are propagated."
+msgstr "Nicht alle erforderlichen Felder sind ausgefüllt."
+
+#: backend.php:38
+#, php-format
+msgid "The password has to be at least %d characters long."
+msgstr "Das Passwort muss mindestens %d Zeichen lang sein."
+
+#: backend.php:40 javascript/Form.js:31
+msgid "The supplied passwords do not match."
+msgstr "Die Passwörter stimmen nicht überein."
+
+#: backend.php:42 backend.php:51
+msgid "Username and/or passwort are incorrect."
+msgstr "Benutzername und/oder Passwort sind inkorrekt."
+
+#: backend.php:44
+msgid "The maximum amount of attempts has been reached. Try again later."
+msgstr ""
+"Die maximale Anzahl von Versuchen wurde erreicht. Bitte versuche es später "
+"erneut."
+
+#: index.php:50
+msgid "Here you can change the password for your Uberspace mail account."
+msgstr ""
+"Hier kannst du das Passwort für deinen Uberspace E-Mail account ändern."
+
+#: index.php:55
+msgid "mail address"
+msgstr "E-Mail Adresse"
+
+#: index.php:56
+msgid "current password"
+msgstr "aktuelles Passwort"
+
+#: index.php:57
+msgid "new password"
+msgstr "neues Passwort"
+
+#: index.php:58
+msgid "repeat new password"
+msgstr "neues Passwort wiederholen"
+
+#: index.php:59
+msgid "change"
+msgstr "ändern"

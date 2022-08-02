@@ -1,9 +1,13 @@
 import Bubbles from "./Bubbles.js";
 import Form    from "./Form.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-	new Bubbles("#background", {
-		bubble_count : 15
-	});
-	new Form();
-});
+class App {
+	constructor(_) {
+		new Bubbles("#background", {
+			bubble_count : 15
+		});
+		new Form(_);
+	}
+}
+
+export default App;
