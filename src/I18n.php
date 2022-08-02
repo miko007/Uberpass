@@ -13,6 +13,7 @@ class I18n {
 		putenv("LC_ALL=$locale");
 		setlocale(LC_ALL, $locale);
 		bindtextdomain("uberpass", $directory);
+		bind_textdomain_codeset("uberpass", "utf-8");
 		textdomain("uberpass");	
 	}
 
