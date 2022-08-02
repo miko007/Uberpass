@@ -52,7 +52,7 @@ $settings = $app->settings();
 			</p>
 			<section id=error></section>
 			<form action="." method="POST" autocomplete="off" id=form>
-				<input type=text name=email placeholder="<?php echo _("mail address"); ?>" autocomplete="false" />
+				<input type=text name=email placeholder="<?php echo $settings->get("mail_placeholder", _("mail address")); ?>" autocomplete="false" />
 				<input type=password name=currentPassword placeholder="<?php echo _("current password") ?>" autocomplete="false" />
 				<input type=password name=password placeholder="<?php echo _("new password"); ?>" />
 				<input type=password name=passwordConfirm placeholder="<?php echo _("repeat new password"); ?>" />
