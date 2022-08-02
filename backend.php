@@ -38,7 +38,7 @@ else if (strlen($password) < $passwordLength)
 	$error = new Error(sprintf(_("The password has to be at least %d characters long."), $passwordLength), 401);
 else if (!$passwordsMatch)
 	$error = new Error(_("The supplied passwords do not match."), 402);
-else if ($attemptManager->attempts($email) > intval($settings->get("max_attempts", "3")))
+else if ($attemptManager->attempts($email) >= intval($settings->get("max_attempts", "3")))
 	$error = new Error(_("The maximum amount of attempts has been reached. Try again later."));
 
 if (!$error && $user) {
