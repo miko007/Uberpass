@@ -2,6 +2,7 @@
 
 namespace uberpass;
 
+use phpDocumentor\Reflection\Types\This;
 use stdClass;
 
 class SerializedUser {
@@ -31,83 +32,71 @@ class SerializedUser {
 	}
 }
 
-class AttemptManager {
-	private $fileName;
-	private $data;
-	private $settings;
+/*
+	FILE FORMAT
 
-	public function __construct(string $fileName, Settings $settings) {
-		$this->settings = $settings;
-		$this->data     = [];
-		$this->fileName = $fileName;
-
-		if (!file_exists($fileName))
-			file_put_contents($fileName, "[]");
-		$fileData = json_decode(file_get_contents($fileName));
-		if (!$fileData)
-			$this->save();
-		foreach ($fileData as $user) {
-			array_push($this->data, new SerializedUser($user));
+	{
+		"foo@mail.com" : {
+			"a" : 0,           // attempts
+			"t" : 1659475007   // last timestamp
 		}
+	}
+*/
+
+class AttemptManager {
+	private $path;
+	private $data;
+	private $datasets;		
+
+	public function __construct(string $path) {
+		$this->path     = $path;
+		$this->data     = [];
+		$this->datasets = [];
+
+		$this->load();
+	}
+
+	public function __destruct() {
+		$this->save();
+	}
+
+	private function load() : void {
+		if (!file_exists($this->path))
+			return;
+		$data = json_decode(file_get_contents($this->path));
+		if (!$data)
+			return;
+		// load file as hash map
+		$this->data     = (array) $data;
+		$this->datasets = array_keys($this->data);
 	}
 
 	private function save() : void {
-		file_put_contents($this->fileName, json_encode($this->data));
+		file_put_contents($this->path, json_encode($this->data));
+	}
+
+	private function exists(string $email) : bool {
+		return in_array($email, $this->datasets);
 	}
 
 	public function attempts(string $email) : int {
-		foreach ($this->data as $user) {
-			if ($user->email !== $email)
-				continue;
-			$user = new SerializedUser($user);
-			
-			return $user->attempts;
-		}
-
-		return 0;
-	}
-
-	public function canTry(string $email) : bool {
-		foreach ($this->data as $user) {
-			if (!$user->email === $email)
-				continue;
-			if ((time() - $user->lastTime) > 60 * 60 * intval($this->settings->get("hours_to_wait", "1"))) {
-				$user->reset();
-				$this->save();
-			}
-			if ($user->attempts >= intval($this->settings->get("max_tries", "3")))
-				return false;
-		}
-
-		return true;
+		return $this->exists($email) ? intval($this->data[$email]->a) : 0;
 	}
 
 	public function reset(string $email) : void {
-		foreach ($this->data as $user) {
-			if ($user->email !== $email)
-				continue;
-			$user->reset();
-			$this->save();
-		}
+		if (!$this->exists($email))
+			return;
+		$this->data[$email]->a = 0;
 	}
 
-	public function falseAttempt(string $email) : void {
-		$user = null;
-		foreach ($this->data as $localUser) {
-			if ($localUser->email !== $email)
-				continue;
-			$localUser->increase();
-			$this->save();
-			return;
+	public function fail(string $email) : void {
+		if ($this->exists($email))
+			$this->data[$email]->a += 1;
+		else {
+			$user = new stdClass();
+			$user->a = 1;
+			$user->t = time();
+			$this->data[$email] = $user;
 		}
-
-		if (!$user) {
-			$user = new SerializedUser();
-			$user->email    = $email;
-		}
-
-		$user->increase();
-		array_push($this->data, $user);
-		$this->save();
 	}
 }

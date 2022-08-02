@@ -28,7 +28,7 @@ class Uberpass {
 		return $this->i18n;
 	}
 
-	public function attempmtManager() : AttemptManager {
+	public function attemptManager() : AttemptManager {
 		return $this->attemptManager;
 	}
 
