@@ -33,22 +33,22 @@ try {
 
 $error = null;
 if ($post->hasErrors())
-	$error = new Error("Es sind nicht alle erforderlichen Felder ausgefüllt.", 400);
+	$error = new Error(_("Not all nessecary fields are propagated."), 400);
 else if (strlen($password) < $passwordLength)
-	$error = new Error("Das Passwort muss mindestens $passwordLength Zeichen lang sein", 401);
+	$error = new Error(sprintf(_("The password has to be at least %d characters long."), $passwordLength), 401);
 else if (!$passwordsMatch)
-	$error = new Error("Die angegebenen Passwörter stimmen nicht überein", 402);
+	$error = new Error(_("The supplied passwords do not match."), 402);
 else if ($userError)
-	$error = new Error("Benutzername und/oder Passwort sind inkorrekt", 503);
+	$error = new Error(_("Username and/or passwort are incorrect."), 503);
 else if (!$attemptManager->canTry($email))
-	$error = new Error("Maximale Anzahl an Änderungsversuchen erreicht. Versuchen Sie es später nochmal.");
+	$error = new Error(_("The maximum amount of attempts has been reached. Try again later."));
 
 if (!$error && $user) {
 	if ($user->validPassword($post->get("currentPassword"))) {
 		$user->setPassword($password);
 	} else {
 		$attemptManager->falseAttempt($email);
-		$error = new Error("Benutzername und/oder Passwort sind inkorrekt", 503);
+		$error = new Error(_("Username and/or passwort are incorrect."), 503);
 	}
 }
 
