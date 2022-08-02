@@ -46,6 +46,7 @@ else if (!$attemptManager->canTry($email))
 if (!$error && $user) {
 	if ($user->validPassword($post->get("currentPassword"))) {
 		$user->setPassword($password);
+		$attemptManager->reset($email);
 	} else {
 		$attemptManager->falseAttempt($email);
 		$error = new Error(_("Username and/or passwort are incorrect."), 503);

@@ -1,7 +1,7 @@
 "use strict";
 
-import {$}                               from "./util.js";
-import DisplayError, {clearDisplayError} from "./DisplayError.js";
+import {$}                                          from "./util.js";
+import {DisplayError, DisplaySuccess, clearDisplay} from "./Display.js";
 
 let _;
 class Form {
@@ -19,7 +19,7 @@ class Form {
 		const fields = this.container.getElementsByTagName("input");
 		const data   = {};
 
-		clearDisplayError();
+		clearDisplay();
 		for (const field of fields)
 			data[field.name] = field.value;
 		const checkValidity = () => {
@@ -50,8 +50,10 @@ class Form {
 		}).then(response => response.json()).then(json => {
 			if (json.status !== 200)
 				DisplayError(json.data);
-			else
-				console.log(json);
+			else {
+				DisplaySuccess("Ihr Passwort wurde erfolgreich geändert.");
+				this.container.reset();
+			}
 		}).catch(error => {
 			console.error(error);
 		});
