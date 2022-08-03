@@ -23,7 +23,7 @@ $settings = $app->settings();
 				<?php
 					$langData = $app->i18n();
 					
-					foreach ($langData->rawData() as $key => $value)
+					foreach ($langData->raw() as $key => $value)
 						echo "\"$key\" : \"$value\",\n";
 				?>
 				};
