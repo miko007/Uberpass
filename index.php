@@ -21,12 +21,13 @@ $settings = $app->settings();
 			const _ = identifier => {
 				const langData = {
 				<?php
+					// a little bit of magic to pass gettext context to javascript
 					$langData = $app->i18n();
 					
 					foreach ($langData->raw() as $key => $value)
 						echo "\"$key\" : \"$value\",\n";
 				?>
-				};
+			};
 
 				return langData[identifier] || identifier;
 			};
