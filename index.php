@@ -40,7 +40,15 @@ $settings = $app->settings();
 <body>
 	<div id="background"></div>
 	<section class="content">
-		<section class="card">
+		<section class=interface>
+			<section class="logo">
+				<img src="images/uberspace_rocket.svg" alt="Uberspace Rakete" />
+				<h1>Uberpass</h1>
+			</section>
+			<input type=text name=email placeholder="<?php echo $settings->get("mail_placeholder", _("mail address")); ?>" autocomplete="false" />
+			<input type=password name=currentPassword placeholder="<?php echo _("current password") ?>" autocomplete="false" />
+		</section>
+		<!---<section class="card">
 			<section class="logo">
 				<img src="images/uberspace_rocket.svg" alt="Uberspace Rakete" />
 				<h1><?php echo $settings->get("title", "Uberpass"); ?></h1>
@@ -59,7 +67,7 @@ $settings = $app->settings();
 				<input type=password name=passwordConfirm placeholder="<?php echo _("repeat new password"); ?>" />
 				<button><?php echo _("change"); ?></button>
 			</form>
-		</section>
+		</section>-->
 		<nav>
 			<?php
 				$links = explode(',', $settings->get("links", ""));

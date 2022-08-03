@@ -106,6 +106,36 @@
   color: #477749;
 }
 
+.interface {
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+  color: white;
+}
+
+.interface input {
+  border: solid 1px #aaa;
+  font-size: 1.2rem;
+  padding: 0.8rem 1rem;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.interface input:first-of-type:not(:last-of-type) {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.interface input:last-of-type:not(:first-of-type) {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-top: none;
+}
+
+.interface img {
+  max-width: 80px;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
